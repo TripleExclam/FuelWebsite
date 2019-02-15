@@ -1,0 +1,318 @@
+html, body {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+	height: 99%;
+	margin: 0;
+	font-family: "Arial", Times, sans-serif;
+	background-color: #A8383B; 
+}
+
+h2 {
+  margin: 0;
+  padding: 5px;
+  white-space: 5px;
+}
+
+hr {
+  width: 90%;
+  color: white;
+}
+
+.top_nav {
+  position: fixed;
+  float: left;
+  z-index: 4;
+  width: 100%;
+  overflow: hidden;
+  background-color: #226765;
+}
+
+.top_nav .left_item {
+  float: left;
+  color: #AA6B39;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.top_nav .left_item:hover {
+  background-color: #679B99;
+  color: black;
+  cursor: pointer;
+}
+
+.top_nav .active {
+  color: white;
+}
+
+.top_nav .active:hover {
+  color: white;
+  background-color: #679B99;
+  cursor: pointer;
+}
+
+.top_nav .fa {
+  float: right;
+  padding: 14px 16px;
+  font-size: 17px;
+  text-align: center;
+  margin: 2px 0px;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.top_nav .fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+ }
+
+ .fa-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.side_nav {
+  height: calc(100% - 49px);
+  width: 180px;
+  position: fixed;
+  top: 49px;
+  z-index: 3;
+  background-color: #0D4D4B;
+  font-size: 12px;
+}
+
+.side_nav a {
+  width: 162px;
+  margin: 5px;
+  padding: 18px 4px;
+  position: relative;
+  float: left;
+  z-index: 2;
+  color: #FFD0AA;
+  text-align: left;
+}
+
+.side_nav .title {
+  font-size: 14px;
+}
+
+.side_nav a:hover {
+  color: black;
+  background-color: #8DCF8A;
+}
+
+.close {
+  z-index: 4;
+  position: absolute;
+  bottom: 0px;
+  width: 90px;
+  border: none;
+  font-size: 32px;
+  float: center;
+  color: #FFD0AA;
+  background: none;
+}
+
+.content_wrapper {
+  position: relative;
+  left: 180px;
+  top: 51px;
+  width: 100%;
+  height: 600px;
+  background-color: #A8383B;
+}
+
+.content{
+  float: left;
+}
+
+.data_entry {
+  width: 500px;
+  height: 750px;
+  margin: 20px 20px;
+  float: left;
+  text-align: center;
+  align-items: center;
+  color: white;
+  background-color: #034500;
+}
+
+.price_view {
+  width: 500px;
+  height: 750px;
+  margin: 20px 20px;
+  float: left;
+  text-align: center;
+  align-items: center;
+  color: white;
+  background-color: #034500;
+}
+
+.data_entry input {
+  width: 468px;
+  position: relative;
+}
+
+.data_entry select {
+  width: 490px;
+  position: relative;
+}
+
+.data_entry span {
+  margin: 5px;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  text-align: left;
+  align-items: left;
+}
+
+input, select {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+input[type=text], select[type=text] {
+  background-color: #f1f1f1;
+}
+input[type=submit] {
+  background-color: #AA6B39;
+  color: #fff;
+} 
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  color: black;
+  border-bottom: 1px solid #d4d4d4; 
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+@media only screen and (max-width: 1250px) {
+  .content {
+      float: none;
+  }
+}
+
+@media only screen and (max-width: 585px) {
+  .topnav .fa {
+      display: none;
+	}
+}
+
+
+@media only screen and (max-width: 400px) {
+  .topnav .left_item {
+	  font-size: 15px;
+	}
+
+	.side_nav { 
+		top: 43px;
+		font-size: 8px;
+		width: 100px;
+	}
+
+  hr {
+    padding: 0px 2px;
+  }
+
+  .side_nav a{ 
+    width: 90px;
+    padding: 5px 4px;
+  }
+
+  .side_nav .title {
+    font-size: 8px;
+  }
+
+  .content_wrapper {
+    top: 43px;
+    left: 100px;
+  }
+}
+
+@media only screen and (max-width: 355px) {
+  .topnav {
+    font-size: 10px;
+	  width: 355px;
+  }
+
+  .topnav .left_item {
+    font-size: 10px;
+  }
+
+  .side_nav { 
+	  display: none;
+	}
+
+  .content_wrapper {
+    left: 0;
+  }
+
+}
+
+
+.color-primary-0 { color: #328A2E }	/* Main Primary color */
+.color-primary-1 { color: #8DCF8A }
+.color-primary-2 { color: #5AAC56 }
+.color-primary-3 { color: #156711 }
+.color-primary-4 { color: #034500 }
+
+.color-secondary-1-0 { color: #226765 }	/* Main Secondary color (1) */
+.color-secondary-1-1 { color: #679B99 }
+.color-secondary-1-2 { color: #41817F }
+.color-secondary-1-3 { color: #0D4D4B }
+.color-secondary-1-4 { color: #003432 }
+
+.color-secondary-2-0 { color: #AA6B39 }	/* Main Secondary color (2) */
+.color-secondary-2-1 { color: #FFD0AA }
+.color-secondary-2-2 { color: #D4996A }
+.color-secondary-2-3 { color: #804415 }
+.color-secondary-2-4 { color: #552600 }
+
+.color-complement-0 { color: #A8383B }	/* Main Complement color */
+.color-complement-1 { color: #FDA8AB }
+.color-complement-2 { color: #D3696C }
+.color-complement-3 { color: #7E1518 }
+.color-complement-4 { color: #540002 }
