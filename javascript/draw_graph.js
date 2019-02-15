@@ -38,39 +38,40 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	                    unit: 'day'
 	                },
 	            	ticks: {
-	                	fontColor: 'black'
+	                	fontColor: 'white'
 	                },
 	                position: 'bottom',
 	                scaleLabel: {
 	                	display: true,
 	                	fontSize: 20,
 	                	labelString: "Date",
-	                	fontColor: 'black'
+	                	fontColor: 'white'
 	                },
 	                gridLines: {
-	                	color: 'black'
+	                	color: 'white'
 	                }
 	            }],
 	            yAxes: [{
 	                ticks: {
-	                	fontColor: 'black'
+	                	fontColor: 'white'
 	                },
 	                position: 'left',
 	                scaleLabel: {
 	                	display: true,
 	                	fontSize: 20,
 	                	labelString: "Price (cents)",
-	                	fontColor: 'black'
+	                	fontColor: 'white'
 	                },
 	                gridLines: {
-	                	color: 'black'
+	                	color: 'white'
 	                }
 	            }]
 	        },
 	        title: {
 	        	display: true,
 	        	text: title_string,
-	        	fontSize: 32
+	        	fontSize: 32,
+	        	color: 'white'
 	        },
 	        legend: {
 	        	display: false

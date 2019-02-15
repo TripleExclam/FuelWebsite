@@ -32,6 +32,7 @@ function get_graph(brand_id, fuel_id) {
 	},
 	dataType: 'json',
 	success: function onSuccess(jsonReturn) {
+		growDiv();
 		var data = [];
 		var regression = [];
 		var labels = [];
@@ -57,4 +58,12 @@ function get_graph(brand_id, fuel_id) {
 			console.log(xhr.responseText);
 	}
 	})
+}
+
+function growDiv() {
+	var growDiv = document.getElementById('fuel_data');
+	growDiv.style.maxHeight = "1000px";
+	$('#content_wrapper').animate({
+		     scrollTop: $( '#header_image' ).height()
+		   }, 'slow');
 }

@@ -42,8 +42,42 @@
 	</div>
 </div>
 
-<div id="content_wrapper" class="content_wrapper">
-	<div id="header_image" class="header_image"> </div>
+<div id="content_wrapper" class="content_wrapper" onscroll="scrollEvent()">
+	<div id="header_image" class="header_image"> 
+		<div id="header_text" class="header_text">
+			<p> WELCOME TO FUEL SCAB </p>
+			<h1> PRICE DATA, JOURNEY PLANNER, PRICE OUTLOOK AND NEWS </h1>
+		</div>
+	</div>
+	<div id="entry_fields1" class="data_entry">
+		<div id="fuel_data" class="fuel_data">
+			<h2> FUEL DATA </h2>
+			<select id="select_brand" type="text" name="trim" placeholder="loading..."> 
+				<option value="null"> ------ </option>
+				<?php 
+				include("connect.php");
+				$sql = "SELECT DISTINCT b.* FROM brand_types b, price p, station s WHERE s.brand_id = b.brand_id AND s.id = p.station_id GROUP BY b.brand_id";
+				$query = mysqli_query($con, $sql);
+
+				while ($brand = mysqli_fetch_array($query)) {
+					echo "<option value=".$brand['brand_id']."> ".$brand['brand_name']." </option>";
+				}
+				?>
+			</select>
+			<select id="select_fuel_id" type="text" name="trim" placeholder="loading..."> 
+				<option value="null"> ------ </option>
+				<?php 
+				include("connect.php");
+				$sql = "SELECT DISTINCT f.* FROM fuel_types f, price p, station s WHERE f.fuel_id = p.fuel_id AND s.id = p.station_id GROUP BY f.fuel_id";
+				$query = mysqli_query($con, $sql);
+
+				while ($fuel = mysqli_fetch_array($query)) {
+					echo "<option value=".$fuel['fuel_id']."> ".$fuel['name']." </option>";
+				}
+				?>
+			</select>
+		</div>
+	</div>
 	<div id="entry_fields2" class="data_entry">
 		<div id="back" class="back">
 			<h2 id="fuel_results"></h2>
@@ -95,35 +129,6 @@
 		    <input id="submit_query" type="submit">
 		</div>
 	</div>
-	<div id="entry_fields1" class="data_entry">
-		<div id="fuel_data" class="fuel_data">
-			<h2> FUEL DATA </h2>
-			<select id="select_brand" type="text" name="trim" placeholder="loading..."> 
-				<option value="null"> ------ </option>
-				<?php 
-				include("connect.php");
-				$sql = "SELECT DISTINCT b.* FROM brand_types b, price p, station s WHERE s.brand_id = b.brand_id AND s.id = p.station_id GROUP BY b.brand_id";
-				$query = mysqli_query($con, $sql);
-
-				while ($brand = mysqli_fetch_array($query)) {
-					echo "<option value=".$brand['brand_id']."> ".$brand['brand_name']." </option>";
-				}
-				?>
-			</select>
-			<select id="select_fuel_id" type="text" name="trim" placeholder="loading..."> 
-				<option value="null"> ------ </option>
-				<?php 
-				include("connect.php");
-				$sql = "SELECT DISTINCT f.* FROM fuel_types f, price p, station s WHERE f.fuel_id = p.fuel_id AND s.id = p.station_id GROUP BY f.fuel_id";
-				$query = mysqli_query($con, $sql);
-
-				while ($fuel = mysqli_fetch_array($query)) {
-					echo "<option value=".$fuel['fuel_id']."> ".$fuel['name']." </option>";
-				}
-				?>
-			</select>
-		</div>
-	</div>
 </div>
 <script type="text/javascript" src="javascript/navbar_change.js"></script>
 <script type="text/javascript" src="javascript/draw_graph.js"></script>
@@ -131,6 +136,7 @@
 <script type="text/javascript" src="javascript/fuel_query.js"></script>
 <script type="text/javascript" src="javascript/address_search.js"></script>
 <script type="text/javascript" src="javascript/car_query.js"></script>
+<script type="text/javascript" src="javascript/scroll_event.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI&libraries=places&callback=initAutocomplete" async defer>
 </script>
 </body>

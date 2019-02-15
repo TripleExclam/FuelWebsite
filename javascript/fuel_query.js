@@ -21,6 +21,7 @@ $( "#flip_back" ).click( function() {
 });
 
 $( "#submit_query" ).click( function() {
+	document.getElementById('back').style.height = $( '#front' ).height() + "px";
 	var elem2 = document.getElementById('front');
 	elem2.style.WebkitTransform = "perspective( 600px ) rotateY( 180deg )";
 	var elem = document.getElementById('back');
@@ -42,8 +43,8 @@ $( "#submit_query" ).click( function() {
 	} else if (trim_pick.options[trim_pick.selectedIndex].value == "------") {
 		alert("Please select a valid vehicle trim");
 	} else {
-	document.getElementById('fuel_results').innerHTML = "loading...";
-	console.log(location_pick.value);
+		document.getElementById('fuel_results').innerHTML = "loading...";
+		console.log(location_pick.value);
 		$.ajax({
 			method: 'GET',
 			url: 'http://localhost/FP/API/math.php?',
