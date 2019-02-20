@@ -44,3 +44,4 @@ for ($i = 0; $i < count($x_values); $i++) {
 echo json_encode($data);
 
 ?>
+

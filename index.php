@@ -14,9 +14,10 @@
 <div id="top_nav" class="top_nav">
 	<div class="top_nav_elements">
 		<a href="#" class="left_item active" id="home" onclick="change(this)" >HOME</a>
-		<a href="#" class="left_item" id="data" onclick="change(this)">DATA</a>
 		<a href="#" class="left_item" id="prices" onclick="change(this)">PRICES</a>
 		<a href="#" class="left_item" id="calculate" onclick="change(this)">CALCULATE</a>
+		<a href="#" class="left_item" id="data" onclick="change(this)">DATA</a>
+		<div id="slide_bar" class="slide_bar"></div>
 	</div>
 </div>
 
@@ -129,15 +130,26 @@
 		    <input id="submit_query" type="submit">
 		</div>
 	</div>
+	<div id="entry_fields3" class="data_entry">
+		<div id="map_view" class="map_view">
+			<div id="map"></div>
+		</div>
+	</div>
 </div>
+<script type="text/javascript" src="javascript/draw_map.js"></script>
 <script type="text/javascript" src="javascript/navbar_change.js"></script>
 <script type="text/javascript" src="javascript/draw_graph.js"></script>
 <script type="text/javascript" src="javascript/graph_query.js"></script>
 <script type="text/javascript" src="javascript/fuel_query.js"></script>
 <script type="text/javascript" src="javascript/address_search.js"></script>
 <script type="text/javascript" src="javascript/car_query.js"></script>
-<script type="text/javascript" src="javascript/scroll_event.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI&libraries=places&callback=initAutocomplete" async defer>
+<script type="text/javascript">
+function initialize() {
+  initAutocomplete();
+  initMap();
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI&libraries=places&callback=initialize" async defer>
 </script>
 </body>
 </html>
