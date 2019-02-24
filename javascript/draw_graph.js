@@ -10,10 +10,7 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	        datasets: [{
 	            data: graph_data,
 	            backgroundColor: "blue",
-		        borderColor: "lightblue",
-		        fill: false,
-		        lineTension: 0,
-		        radius: 5
+		        borderColor: "lightblue"
 	        }, 
 	        {
 	            data: graph_regression,
@@ -23,7 +20,7 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 		        pointRadius: 0,
 		        lineTension: 0,
 		        fill: false,
-		        borderWidth: 10,
+		        borderWidth: 5,
 		        borderColor: "pink",
 	        }
 	        ]
@@ -33,16 +30,10 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	    	responsive: true,
 	    	onResize: function(chart, size) {
 				if ($( '#content_wrapper' ).width() < 730) {
-					chart.data.datasets[0].pointRadius = 3;
-					chart.data.datasets[1].borderWidth = 3;
-					chart.options.scales.yAxes[0].ticks.stepSize = 10;
-					chart.options.scales.xAxes[0].time.stepSize = 1;
+					chart.options.title.fontSize = 12;
 					chart.update();
 				} else {
-					chart.data.datasets[0].pointRadius = 5;
-					chart.data.datasets[1].borderWidth = 10;
-					chart.options.scales.yAxes[0].ticks.stepSize = 5;
-					chart.options.scales.xAxes[0].time.stepSize = 0.5;
+					chart.options.title.fontSize = 20;
 					chart.update();
 				}
 			},
@@ -50,7 +41,10 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	            xAxes: [{
 	            	type: 'time',
 	            	time: {
-	                    unit: 'month'
+	                    unit: 'day',
+	                    displayFormats: {
+	                    	day: 'MMM D YYYY'
+	                    }
 	                },
 	            	ticks: {
 	                	fontColor: 'white'
@@ -58,7 +52,6 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	                position: 'bottom',
 	                scaleLabel: {
 	                	display: true,
-	                	fontSize: 16,
 	                	labelString: "Date",
 	                	fontColor: 'white'
 	                },
@@ -68,13 +61,11 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	            }],
 	            yAxes: [{
 	                ticks: {
-	                	stepSize: 5,
 	                	fontColor: 'white'
 	                },
 	                position: 'left',
 	                scaleLabel: {
 	                	display: true,
-	                	fontSize: 16,
 	                	labelString: "Price (cents)",
 	                	fontColor: 'white'
 	                },

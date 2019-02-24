@@ -21,14 +21,14 @@ class car_query {
 
 	function get_fuel_type() {
 		include("connect.php");
-		$sql = "SELECT * FROM fuel_types WHERE name = '".$this->car_data['model_engine_fuel']."' ";
+		$sql = "SELECT * FROM fuel_types WHERE fuel_name = '".$this->car_data['model_engine_fuel']."' ";
 		$query = mysqli_query($con, $sql);
 		if (mysqli_num_rows($query) == 0) {
-			$sql = "INSERT INTO fuel_types(fuel_id, name) VALUES (0, '".$this->car_data['model_engine_fuel']."')";
+			$sql = "INSERT INTO fuel_types(fuel_id, fuel_name) VALUES (0, '".$this->car_data['model_engine_fuel']."')";
 			$query = mysqli_query($con, $sql);
 		}
 		switch($this->car_data['model_engine_fuel']) {
-			case "Gasoline - Premium": 
+/*			case "Gasoline - Premium": 
 				return 5;
 				break;
 			case "Gasoline - unleaded 95": 
@@ -36,7 +36,7 @@ class car_query {
 				break;
 			case "Gasoline": 
 				return 2;
-				break;
+				break;*/
 			case "Diesel": 
 				return 3;
 				break;
@@ -52,7 +52,10 @@ class car_query {
 	}
 
 	function get_tank_capacity() {
-		return (float) $this->car_data['model_fuel_cap_l'];
+		if ((float) $this->car_data['model_fuel_cap_l'] > 10) {
+			return (float) $this->car_data['model_fuel_cap_l'];
+		} 
+		return 40;
 	}
 
 	function get_data() {

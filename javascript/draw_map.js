@@ -2,15 +2,17 @@ var features = [];
 
 function initMap() {
   $.ajax({
-  url: 'http://localhost/FP/API/station_data_api.php?',
+  url: 'http://localhost/FP/API/station_data_api.php',
   dataType: 'json',
   success: function onSuccess(jsonReturn) {
+    console.log(jsonReturn);
       for (var i = 0; i<jsonReturn.length; i++) {
         features[i] = {
+          name: jsonReturn[i].name,
           latitude: jsonReturn[i].latitude,
           longtitude: jsonReturn[i].longtitude,
           bowser: jsonReturn[i].provider,
-          type: 'info'          
+          prices: jsonReturn[i].prices          
         }
       }
       loadMap(features);
@@ -67,9 +69,40 @@ function loadMap(features) {
   features.forEach(function(feature) {
     var marker = new google.maps.Marker({
       position: new google.maps.LatLng(feature.latitude, feature.longtitude),
-      icon: images[feature.bowser],
-      map: map
+      map: map,
+      title: feature.name
     });
+    marker.addListener('click', function() {
+      var infowindow = new google.maps.InfoWindow({
+        content: buildContentString(feature.name, feature.prices)
+      });
+      infowindow.open(map, marker);
+    });
+
   });
 
+}
+
+function buildContentString(station, type_price) {
+  var price_string = "";
+  for (var i = 0; i < type_price.length; i++) {
+    if (i == type_price.length - 1) {
+       price_string += " and "
+    } else if (i != type_price.length - 2 && i != 0) {
+       price_string += ", "    
+    }
+    price_string += type_price[i].fuel + " at $" 
+      + type_price[i].price/1000 + " per litre";
+  }
+
+
+  var contentString = '<div id="content">'+
+    '<div id="siteNotice" class="">'+
+    '</div>'+
+    '<h1 id="firstHeading" class="first_heading">'+ station +
+    '</h1><div id="bodyContent" class="fuel_popup_content">'+
+    '<p>Current Prices are as follows: ' + price_string + '</p>' +
+    '</div>'+
+    '</div>';
+  return contentString;
 }

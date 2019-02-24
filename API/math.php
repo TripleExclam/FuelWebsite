@@ -7,7 +7,11 @@ $year = $_GET['year'];
 $make = $_GET['make'];
 $model = $_GET['model'];
 $trim = $_GET['trim'];
-$car = new car_query($year, $make, $model, $trim);
+if ($make == "--------" || $make == "") {
+	$car = new car_query("2005", "Mini", "Cooper", "S");
+} else {
+	$car = new car_query($year, $make, $model, $trim);
+}
 $ch = curl_init();
 $location = curl_escape($ch, $_GET['current_loc']);
 $optional_stop = false;
@@ -45,9 +49,9 @@ if ($consumption == 0) {
 }
 
 $cost = array();
-$current_date = date('Y-m-d', strtotime('- 2 days'));
+$current_date = date('Y-m-d', strtotime('- 7 days'));
 
-$sql = "SELECT * FROM station s, distance d, price p WHERE d.location='".$location."' AND p.fuel_id='".$fuel_type."' AND p.date_updated > '".$current_date."' AND p.date_updated >= ALL (SELECT date_updated FROM price p2 WHERE p2.fuel_id = p.fuel_id AND p2.station_id = p.station_id) AND p.station_id = d.station_id AND s.id = p.station_id GROUP BY s.id";
+$sql = "SELECT * FROM station s, distance d, price p, fuel_types t WHERE d.location LIKE '".$location."' AND p.fuel_id='".$fuel_type."' AND p.date_updated >= ALL (SELECT date_updated FROM price p2 WHERE p2.fuel_id = p.fuel_id AND p2.station_id = p.station_id) AND p.station_id = d.station_id AND s.id = p.station_id AND t.fuel_id = p.fuel_id GROUP BY s.id";
 $query = mysqli_query($con, $sql);
 if (!$query) {
 	echo("Error description: " . mysqli_error($con));
@@ -61,13 +65,18 @@ function compare($a, $b) {
 }
 $i = 0;
 while ($station = mysqli_fetch_array($query)) {
+	if ($i == 10) {
+		break;
+	}
 	$cost[$i]['station_name'] = $station['name'];
-	$cost[$i]['full_tank'] = $station['price']/1000 * ($tank_capacity + $consumption * 2 * $station['distance']/100000); 
-	$cost[$i]['normal_cost'] = $station['price']/1000 * $tank_capacity;
-	$cost[$i]['fuel_price'] = $station['price'];
+	$cost[$i]['full_tank'] = $station['price'] / 1000 
+	* ($tank_capacity + $consumption * 2 * $station['distance']/100000); 
+	$cost[$i]['full_tank'] = number_format((float)$cost[$i]['full_tank'], 2, '.', '');
+	$cost[$i]['normal_cost'] = $station['price'] / 1000 * $tank_capacity;
+	$cost[$i]['fuel_price'] = $station['price'] / 1000;
 	$cost[$i]['distance'] = $station['distance'];
 	$cost[$i]['date_updated'] = $station['date_updated'];
-	$cost[$i]['fuel_type'] = $station['fuel_id'];
+	$cost[$i]['fuel_type'] = $station['fuel_name'];
 	$cost[$i]['tank_capacity'] = $tank_capacity;
 	usort($cost, "compare");
 	$i++;

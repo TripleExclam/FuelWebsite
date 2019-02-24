@@ -13,8 +13,6 @@ if($re === false) {
 curl_close($ch);
 $decodedarray = json_decode($re, true);
 
-echo var_dump($decodedarray);
-
 for ($i = 0; $i < count($decodedarray['Brands']); $i++) {
 	$sql = "INSERT INTO brand_types(brand_id, brand_name) VALUES ('".$decodedarray['Brands'][$i]['BrandId']."', '".$decodedarray['Brands'][$i]['Name']."')";
 	$query = mysqli_query($con, $sql);

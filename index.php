@@ -52,39 +52,75 @@
 	</div>
 	<div id="entry_fields1" class="data_entry">
 		<div id="fuel_data" class="fuel_data">
-			<h2> FUEL DATA </h2>
-			<select id="select_brand" type="text" name="trim" placeholder="loading..."> 
-				<option value="null"> ------ </option>
-				<?php 
-				include("connect.php");
-				$sql = "SELECT DISTINCT b.* FROM brand_types b, price p, station s WHERE s.brand_id = b.brand_id AND s.id = p.station_id GROUP BY b.brand_id";
-				$query = mysqli_query($con, $sql);
+			<h1> FUEL DATA </h1>
+			<div id="search_field" class="search_field">
+				<div id="select_b" class="select_b">
+					<h2>Station:</h2>
+					<select id="select_brand" class="select_brand" type="text" placeholder="loading..."> 
+						<option value="null"> ------ </option>	
+						<?php 
+						include("connect.php");
+						$sql = "SELECT DISTINCT b.* FROM brand_types b, price p, station s WHERE s.brand_id = b.brand_id AND s.id = p.station_id GROUP BY b.brand_id";
+						$query = mysqli_query($con, $sql);
 
-				while ($brand = mysqli_fetch_array($query)) {
-					echo "<option value=".$brand['brand_id']."> ".$brand['brand_name']." </option>";
-				}
-				?>
-			</select>
-			<select id="select_fuel_id" type="text" name="trim" placeholder="loading..."> 
-				<option value="null"> ------ </option>
-				<?php 
-				include("connect.php");
-				$sql = "SELECT DISTINCT f.* FROM fuel_types f, price p, station s WHERE f.fuel_id = p.fuel_id AND s.id = p.station_id GROUP BY f.fuel_id";
-				$query = mysqli_query($con, $sql);
+						while ($brand = mysqli_fetch_array($query)) {
+							echo "<option value=".$brand['brand_id']."> ".$brand['brand_name']." </option>";
+						}
+						?>
+						<option value=""> All Stations </option>
+					</select>
+				</div>
+				<div id="select_b" class="select_b">
+					<h2>Fuel:</h2>
+					<select id="select_fuel_id" type="text" placeholder="loading..."> 
+						<option value="null"> ------ </option>
+					</select>
+				</div>
+				<div id="select_b" class="select_b" style="display: none;">
+					<h2>From:</h2>
+					<select id="select_date_range_from" type="text" name="trim" placeholder="loading..."> 
+						<option value="null"> ------ </option>
+						<?php 
+						include("connect.php");
+						$sql = "SELECT MIN(date_updated) as minD, MAX(date_updated) as maxD FROM price";
+						$query = mysqli_query($con, $sql);
 
-				while ($fuel = mysqli_fetch_array($query)) {
-					echo "<option value=".$fuel['fuel_id']."> ".$fuel['name']." </option>";
-				}
-				?>
-			</select>
+						$date = mysqli_fetch_array($query);
+
+						echo "<option value=".$date['minD']."> ".$date['minD']." </option>";
+						echo "<option value=".$date['maxD']."> ".$date['maxD']." </option>";
+
+						?>
+					</select>
+				</div>
+				<div class="select_b" style="display: none;">
+					<h2>To:</h2>
+					<select id="select_date_range_to" type="text" name="trim" placeholder="loading..."> 
+						<option value="null"> ------ </option>
+						<?php 
+						include("connect.php");
+						$sql = "SELECT MIN(date_updated) as minD, MAX(date_updated) as maxD FROM price";
+						$query = mysqli_query($con, $sql);
+
+						$date = mysqli_fetch_array($query);
+						echo "<option value=".$date['minD']."> ".$date['minD']." </option>";
+						echo "<option value=".$date['maxD']."> ".$date['maxD']." </option>";
+						?>
+					</select>
+				</div>
+				<div class="keyword" style="display: none;">
+					<input id="keyword_search" class="keyword_search" type="text" placeholder="keyword search" name="keywords" style="display: none;">
+				</div>
+			</div>
 		</div>
 	</div>
 	<div id="entry_fields2" class="data_entry">
 		<div id="back" class="back">
 			<h2 id="fuel_results"></h2>
-			<ol id="fuel_results_data" class="fuel_stations">
-			
-			</ol>
+			<table id="fuel_results_data" class="fuel_stations">
+				
+				<!-- Content From Javascript. -->
+			</table>
 			<button id="flip_back"> Go Back </button>
 		</div>
 		<div id="front" class="front">
@@ -99,25 +135,25 @@
 			<span> Vehicle Make: </span>
 			<div class="autocomplete">
 		    	<select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" id="select_makes" type="text" name="make" placeholder="loading..."> 
-		    		<option> ------ </option>
+		    		<option>--------</option>
 		    	</select>
 		    </div>
 		    <span> Year of production: </span>
 		    <div class="autocomplete">
 				<select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" id="select_year" type="text" name="year" placeholder="loading..."> 
-					<option> ------ </option>
+					<option>--------</option>
 				</select>
 		    </div>
 		    <span> Production model: </span>
 		    <div class="autocomplete">
 				<select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" id="select_model" type="text" name="model" placeholder="loading..."> 
-					<option> ------ </option>
+					<option>--------</option>
 				</select>
 		    </div>
 		    <span> Trim type: </span>
 		    <div class="autocomplete">
 				<select onmousedown="if(this.options.length>8){this.size=8;}"  onchange='this.size=0;' onblur="this.size=0;" id="select_trim" type="text" name="trim" placeholder="loading..."> 
-					<option> ------ </option>
+					<option>--------</option>
 				</select>
 		    </div>
 		    <span> &#x200B </span>

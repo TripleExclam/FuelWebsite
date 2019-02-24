@@ -41,18 +41,19 @@ class distance_query {
 		return $box;
 	}
 
-	function get_stations($width=0.02) {
+	function get_stations($width=0.0005) {
 		include("connect.php");
 		$box = $this->build_box($width);
-		$sql = "SELECT * FROM station WHERE latitude > '".$box[0]."' AND latitude < '".$box[1]."' AND longtitude > '".$box[2]."' AND longtitude < '".$box[3]."' ";
+		$sql = "SELECT * FROM station WHERE latitude > '".$box[0]."' AND latitude < '".$box[1]."' AND longtitude > '".$box[2]."' AND longtitude < '".$box[3]."' 
+			ORDER BY latitude = '".$this->latitude."', longtitude = '".$this->longtitude."'";
 		$query = mysqli_query($con, $sql);
-		if (mysqli_num_rows($query) == 0) {
+		if (mysqli_num_rows($query) <= 10) {
 			mysqli_close($con);
-			$this->get_stations($width * 2);
+			$this->get_stations($width += 0.0005);
 		} else {
 			$i = 0;
 			while ($station = mysqli_fetch_array($query)) {
-				if ($i > 20) {
+				if ($i == 11) {
 					break;
 				}
 				$this->populate_distance($station['id']);
