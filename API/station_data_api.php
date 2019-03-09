@@ -17,6 +17,9 @@ while ($station = mysqli_fetch_array($query)) {
 	$data[$i]['name'] = $station['name'];
 	$data[$i]['latitude'] = $station['latitude'];
 	$data[$i]['longtitude'] = $station['longtitude'];
+	if (mysqli_num_rows($query2) == 0) {
+		continue;
+	}
 	$j = 0;
 	while ($station_price = mysqli_fetch_array($query2)) {
 		$data[$i]['prices'][$j]['price'] = $station_price['price'];

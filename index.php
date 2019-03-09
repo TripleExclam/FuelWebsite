@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title> Brisbane Fuel Scab </title>
+	<title> FuelMetric </title>
 	<link rel="stylesheet" href="css/new_style.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +24,7 @@
 <div id="sidenav" class="side_nav">
 	<div class="side_nav_elements">
 		<h3>
-			<a id="BrisFuel"> BRISBANE FUEL SCAB </a>
+			<a id="BrisFuel"> FuelMetric </a>
 		</h3>
 		<hr>
 		<div class="nav_div"> 
@@ -46,8 +46,8 @@
 <div id="content_wrapper" class="content_wrapper" onscroll="scrollEvent()">
 	<div id="header_image" class="header_image"> 
 		<div id="header_text" class="header_text">
-			<p> WELCOME TO FUEL SCAB </p>
-			<h1> PRICE DATA, JOURNEY PLANNER, PRICE OUTLOOK AND NEWS </h1>
+			<p> WELCOME TO FUELMETRIC </p>
+			<h1> HISTORICAL DATA, PRICE SEARCH AND PRICE MAP </h1>
 		</div>
 	</div>
 	<div id="entry_fields1" class="data_entry">
@@ -117,6 +117,7 @@
 	<div id="entry_fields2" class="data_entry">
 		<div id="back" class="back">
 			<h2 id="fuel_results"></h2>
+			<div id="loader" class="loader"></div> 
 			<table id="fuel_results_data" class="fuel_stations">
 				
 				<!-- Content From Javascript. -->

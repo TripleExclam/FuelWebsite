@@ -1,5 +1,14 @@
 <?php 
 
+/*
+Queries a vehicle database and returns the appropriate information about the vehicle.
+params:
+	year: the year of production,
+	make: vehicle make,
+	model: vehicle model,
+	trim: vehicle specifics
+	car_data: an array of data about the vehicle
+*/
 class car_query {
 	private $year;
 	private $make;
@@ -7,6 +16,9 @@ class car_query {
 	private $trim;
 	private $car_data;
 
+	/*
+	Builds all varibles and calls the main method.
+	*/
 	function __construct($year, $make, $model, $trim) {
 		$this->year = $year;
 		$this->make = $make;
@@ -15,10 +27,16 @@ class car_query {
 		$this->get_data();
 	}
 
+	/*
+	Returns vehicle economy.
+	*/
 	function get_economy() {
 		return (float) $this->car_data['model_lkm_mixed'];
 	}
 
+	/*
+	Returns vehicle fuel type.
+	*/
 	function get_fuel_type() {
 		include("connect.php");
 		$sql = "SELECT * FROM fuel_types WHERE fuel_name = '".$this->car_data['model_engine_fuel']."' ";
@@ -51,6 +69,9 @@ class car_query {
 		}
 	}
 
+	/*
+	Returns vehicle tank capacity.
+	*/
 	function get_tank_capacity() {
 		if ((float) $this->car_data['model_fuel_cap_l'] > 10) {
 			return (float) $this->car_data['model_fuel_cap_l'];
@@ -58,6 +79,9 @@ class car_query {
 		return 40;
 	}
 
+	/*
+	Queries the database.
+	*/
 	function get_data() {
 		$ch = curl_init();
 

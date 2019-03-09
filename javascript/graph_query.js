@@ -118,6 +118,7 @@ function get_graph(brand_id, fuel_id, start_date, end_date, station) {
 	})
 }
 
+// Animates the div as it grows.
 function growDiv() {
 	var growDiv = document.getElementById('fuel_data');
 	growDiv.style.maxHeight = "2000px";

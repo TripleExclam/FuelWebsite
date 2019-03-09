@@ -1,7 +1,6 @@
 /*
 Rotates front and back elements. Processes the associative queries.
 */
-
 var elem = document.getElementById('back');
 var elem2 = document.getElementById('front');
 elem.style.display = "block";
@@ -47,7 +46,13 @@ $( "#submit_query" ).click( function() {
 Aquires the station data and displays it in the document.
 */
 function loadFuel(location_pick, year_pick, make_pick, model_pick, trim_pick, destination_pick) {
-	document.getElementById('submit_query').value = "loading...";
+	document.getElementById('back').style.height = $( '#front' ).height() + "px";
+	var elem2 = document.getElementById('front');
+	elem2.style.WebkitTransform = "perspective( 600px ) rotateY( 180deg )";
+	var elem = document.getElementById('back');
+	elem.style.WebkitTransform = "perspective( 600px ) rotateY( 0deg )";
+	$("#fuel_results_data").empty();
+	document.getElementById('loader').style.display = "inline-block";
 	$.ajax({
 		method: 'GET',
 		url: 'http://localhost/FP/API/math.php?',
@@ -61,13 +66,7 @@ function loadFuel(location_pick, year_pick, make_pick, model_pick, trim_pick, de
 		},
 		dataType: 'json',
 		success: function onSuccess(jsonReturn) {
-			document.getElementById('back').style.height = $( '#front' ).height() + "px";
-			var elem2 = document.getElementById('front');
-			elem2.style.WebkitTransform = "perspective( 600px ) rotateY( 180deg )";
-			var elem = document.getElementById('back');
-			elem.style.WebkitTransform = "perspective( 600px ) rotateY( 0deg )";
-			$("#fuel_results_data").empty();
-			console.log(jsonReturn);
+			document.getElementById('loader').style.display = "none";
 			document.getElementById('fuel_results').innerHTML = "Fuel Results:";
 			document.getElementById("fuel_results_data").innerHTML += ("<tr class=fuel_station><th>Station</th><th>" + jsonReturn[0].fuel_type + " ($) </th><th>Distance (km) </th><th>Full Tank (~$) </th></tr>" );
 			for (var i = 0; i < jsonReturn.length; i++) {

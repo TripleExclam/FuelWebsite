@@ -1,11 +1,14 @@
 var features = [];
 
+/*
+Draws an interative map - google map - with markers for each fuel station.
+Lots of work to be done here.
+*/
 function initMap() {
   $.ajax({
   url: 'http://localhost/FP/API/station_data_api.php',
   dataType: 'json',
   success: function onSuccess(jsonReturn) {
-    console.log(jsonReturn);
       for (var i = 0; i<jsonReturn.length; i++) {
         features[i] = {
           name: jsonReturn[i].name,
@@ -74,7 +77,8 @@ function loadMap(features) {
     });
     marker.addListener('click', function() {
       var infowindow = new google.maps.InfoWindow({
-        content: buildContentString(feature.name, feature.prices)
+        content: buildContentString(feature.name, feature.prices),
+        maxWidth: 200
       });
       infowindow.open(map, marker);
     });
@@ -86,13 +90,8 @@ function loadMap(features) {
 function buildContentString(station, type_price) {
   var price_string = "";
   for (var i = 0; i < type_price.length; i++) {
-    if (i == type_price.length - 1) {
-       price_string += " and "
-    } else if (i != type_price.length - 2 && i != 0) {
-       price_string += ", "    
-    }
-    price_string += type_price[i].fuel + " at $" 
-      + type_price[i].price/1000 + " per litre";
+    price_string += "<div><b>" + type_price[i].fuel + ":</b> $" 
+      + type_price[i].price/1000 + "</div>";
   }
 
 
@@ -101,7 +100,7 @@ function buildContentString(station, type_price) {
     '</div>'+
     '<h1 id="firstHeading" class="first_heading">'+ station +
     '</h1><div id="bodyContent" class="fuel_popup_content">'+
-    '<p>Current Prices are as follows: ' + price_string + '</p>' +
+     price_string +
     '</div>'+
     '</div>';
   return contentString;

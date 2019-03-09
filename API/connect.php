@@ -1,4 +1,8 @@
 <?php
+
+//Connects to the database.
+//Add api security features here.
+
 $host = 'localhost:3308';
 $user = 'root';
 $pass = '';

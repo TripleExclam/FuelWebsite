@@ -1,11 +1,21 @@
 <?php
-
+/*
+Locates the closest stations and inserts this information into the database
+params:
+	longtitude
+	latitude
+	location
+	detination (optional)
+*/
 class distance_query {
 	private $longtitude;
 	private $latitude;
 	private $location;
 	private $destination;
 
+	/*
+	Assigns variables
+	*/
 	function __construct($latitude, $longtitude, $location, $destination=false) {
 		$this->latitude = $latitude;
 		$this->longtitude = $longtitude;
@@ -14,6 +24,9 @@ class distance_query {
 		$this->get_stations();
 	}
 
+	/*
+	Creates a box to search for stations within.
+	*/
 	function build_box($width) {
 		if ($this->destination) {
 			$ch = curl_init();
@@ -41,6 +54,9 @@ class distance_query {
 		return $box;
 	}
 
+	/*
+	Returns ten stations closest to the box. 
+	*/
 	function get_stations($width=0.0005) {
 		include("connect.php");
 		$box = $this->build_box($width);
@@ -62,6 +78,9 @@ class distance_query {
 		}
 	}
 
+	/*
+	Inserts the station data into the database.
+	*/
 	function populate_distance($station) {
 		include("connect.php");
 		$sql = "SELECT * FROM distance WHERE station_id='".$station."' AND location='".$this->location."'";
