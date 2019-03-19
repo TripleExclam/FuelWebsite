@@ -30,11 +30,9 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	    	responsive: true,
 	    	onResize: function(chart, size) {
 				if ($( '#content_wrapper' ).width() < 730) {
-					chart.options.title.fontSize = 12;
-					chart.update();
+					chart.options.scales.xAxes[0].time.unitStepSize = 10;
 				} else {
-					chart.options.title.fontSize = 20;
-					chart.update();
+					chart.options.scales.xAxes[0].time.unitStepSize = 5;
 				}
 			},
 	        scales: {
@@ -47,30 +45,30 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	                    }
 	                },
 	            	ticks: {
-	                	fontColor: 'white'
+	                	fontColor: 'black'
 	                },
 	                position: 'bottom',
 	                scaleLabel: {
 	                	display: true,
 	                	labelString: "Date",
-	                	fontColor: 'white'
+	                	fontColor: 'black'
 	                },
 	                gridLines: {
-	                	color: 'white'
+	                	color: 'black'
 	                }
 	            }],
 	            yAxes: [{
 	                ticks: {
-	                	fontColor: 'white'
+	                	fontColor: 'black'
 	                },
 	                position: 'left',
 	                scaleLabel: {
 	                	display: true,
 	                	labelString: "Price (cents)",
-	                	fontColor: 'white'
+	                	fontColor: 'black'
 	                },
 	                gridLines: {
-	                	color: 'white'
+	                	color: 'black'
 	                }
 	            }]
 	        },
@@ -78,7 +76,7 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	        	display: true,
 	        	text: title_string,
 	        	fontSize: 20,
-	        	color: 'white'
+	        	color: 'black'
 	        },
 	        legend: {
 	        	display: false

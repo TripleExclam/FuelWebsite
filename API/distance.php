@@ -16,12 +16,39 @@ class distance_query {
 	/*
 	Assigns variables
 	*/
-	function __construct($latitude, $longtitude, $location, $destination=false) {
-		$this->latitude = $latitude;
-		$this->longtitude = $longtitude;
+	function __construct($location, $destination=false) {
+		$ch = curl_init();
 		$this->location = $location;
 		$this->destination = $destination;
+		$lat_lng = $this->get_coords($this->location);
+		$this->latitude = $lat_lng[0];
+		$this->longtitude = $lat_lng[1];
 		$this->get_stations();
+	}
+
+	/*
+	Returns the coordinates of a given location
+	Params:
+		-Location: A google maps address
+	Return:
+	 	-array: latitudue, longtitude
+	*/
+	function get_coords($location) {
+		$ch = curl_init();
+		curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
+		curl_setopt($ch, CURLOPT_URL, "https://maps.googleapis.com/maps/api/geocode/json?address=". $location . "&key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI");
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$re = curl_exec($ch);
+		if($re === false) {
+		    echo 'Curl error: ' . curl_error($ch);
+		}
+
+		curl_close($ch);
+		$decodedarray = json_decode($re, true);
+		$latitude = $decodedarray['results'][0]['geometry']['location']['lat'];
+		$longtitude = $decodedarray['results'][0]['geometry']['location']['lng'];
+		return array($latitude, $longtitude);
 	}
 
 	/*
@@ -29,20 +56,9 @@ class distance_query {
 	*/
 	function build_box($width) {
 		if ($this->destination) {
-			$ch = curl_init();
-			curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
-			curl_setopt($ch, CURLOPT_URL, "https://maps.googleapis.com/maps/api/geocode/json?address=". $this->destination . "&key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI");
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			$re = curl_exec($ch);
-			if($re === false) {
-			    echo 'Curl error: ' . curl_error($ch);
-			}
-
-			curl_close($ch);
-			$decodedarray = json_decode($re, true);
-			$latitude = $decodedarray['results'][0]['geometry']['location']['lat'];
-			$longtitude = $decodedarray['results'][0]['geometry']['location']['lng'];
+			$lat_lng = $this->get_coords($this->destination);
+			$latitude = $lat_lng[0];
+			$longtitude = $lat_lng[1];
 			$low_lat = ($latitude < $this->latitude ? $latitude : $this->latitude);
 			$high_lat = ($low_lat == $this->latitude ? $latitude : $this->latitude);
 			$low_long = ($longtitude < $this->longtitude ? $longtitude : $this->longtitude);
@@ -69,7 +85,7 @@ class distance_query {
 		} else {
 			$i = 0;
 			while ($station = mysqli_fetch_array($query)) {
-				if ($i == 11) {
+				if ($i == 9) {
 					break;
 				}
 				$this->populate_distance($station['id']);
@@ -120,7 +136,9 @@ class distance_query {
 				}
 			}
 		} 
+		mysqli_close($con);
 	}
+
 }
 
 ?>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title> FuelMetric </title>
+	<title> AusFuel </title>
 	<link rel="stylesheet" href="css/new_style.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +24,7 @@
 <div id="sidenav" class="side_nav">
 	<div class="side_nav_elements">
 		<h3>
-			<a id="BrisFuel"> FuelMetric </a>
+			<a id="BrisFuel"> AusFUel </a>
 		</h3>
 		<hr>
 		<div class="nav_div"> 
@@ -46,18 +46,19 @@
 <div id="content_wrapper" class="content_wrapper" onscroll="scrollEvent()">
 	<div id="header_image" class="header_image"> 
 		<div id="header_text" class="header_text">
-			<p> WELCOME TO FUELMETRIC </p>
+			<p> WELCOME TO AUSFUEL </p>
 			<h1> HISTORICAL DATA, PRICE SEARCH AND PRICE MAP </h1>
 		</div>
 	</div>
 	<div id="entry_fields1" class="data_entry">
 		<div id="fuel_data" class="fuel_data">
-			<h1> FUEL DATA </h1>
+			<h1> Fuel Data </h1>
 			<div id="search_field" class="search_field">
 				<div id="select_b" class="select_b">
 					<h2>Station:</h2>
 					<select id="select_brand" class="select_brand" type="text" placeholder="loading..."> 
 						<option value="null"> ------ </option>	
+						<option value=""> All Stations </option>
 						<?php 
 						include("connect.php");
 						$sql = "SELECT DISTINCT b.* FROM brand_types b, price p, station s WHERE s.brand_id = b.brand_id AND s.id = p.station_id GROUP BY b.brand_id";
@@ -67,7 +68,6 @@
 							echo "<option value=".$brand['brand_id']."> ".$brand['brand_name']." </option>";
 						}
 						?>
-						<option value=""> All Stations </option>
 					</select>
 				</div>
 				<div id="select_b" class="select_b">
@@ -116,6 +116,7 @@
 	</div>
 	<div id="entry_fields2" class="data_entry">
 		<div id="back" class="back">
+			<h1> Price Search </h1>
 			<h2 id="fuel_results"></h2>
 			<div id="loader" class="loader"></div> 
 			<table id="fuel_results_data" class="fuel_stations">
@@ -123,8 +124,10 @@
 				<!-- Content From Javascript. -->
 			</table>
 			<button id="flip_back"> Go Back </button>
+			<img src="css/images/empty_fuel.png" alt="Give me some fuel">
 		</div>
 		<div id="front" class="front">
+			<h1> Price Search </h1>
 			<h2> Current Location </h2>
 			<span> Address: </span>
 			<div class="autocomplete">
@@ -164,11 +167,12 @@
 		    <div class="autocomplete">
 			    <input id="pac-input2" class="controls" type="text" placeholder="Search Box" name="destination">
 			</div>
-		    <input id="submit_query" type="submit">
+		    <button id="submit_query"> View Prices </button>
 		</div>
 	</div>
 	<div id="entry_fields3" class="data_entry">
 		<div id="map_view" class="map_view">
+			<h1> Price Map </h1>
 			<div id="map"></div>
 		</div>
 	</div>

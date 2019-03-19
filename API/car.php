@@ -38,13 +38,6 @@ class car_query {
 	Returns vehicle fuel type.
 	*/
 	function get_fuel_type() {
-		include("connect.php");
-		$sql = "SELECT * FROM fuel_types WHERE fuel_name = '".$this->car_data['model_engine_fuel']."' ";
-		$query = mysqli_query($con, $sql);
-		if (mysqli_num_rows($query) == 0) {
-			$sql = "INSERT INTO fuel_types(fuel_id, fuel_name) VALUES (0, '".$this->car_data['model_engine_fuel']."')";
-			$query = mysqli_query($con, $sql);
-		}
 		switch($this->car_data['model_engine_fuel']) {
 /*			case "Gasoline - Premium": 
 				return 5;
@@ -57,9 +50,6 @@ class car_query {
 				break;*/
 			case "Diesel": 
 				return 3;
-				break;
-			case "Regular Unleaded": 
-				return 2;
 				break;
 			case "Electric": 
 				return 4;

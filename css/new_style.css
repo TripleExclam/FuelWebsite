@@ -115,7 +115,8 @@ html, body {
 .header_text {
 	position: relative;
 	text-align: left;
-	top: 50%;
+	top: 60%;
+	left: 2.5%;
 	width: 40%;
 	color: white;
 }
@@ -126,6 +127,11 @@ html, body {
 	float: left;
 	text-align: center;
 	color: white;
+}
+
+.data_entry h1 {
+	font-size: 40px;
+	color: #ef8d2b;
 }
 
 .data_entry h2 {
@@ -143,22 +149,55 @@ html, body {
   width: 80%;
   padding: 10px;
   margin: 5px;
-  border-radius: 15px;
+  border-radius: 5px;
   font-size: 20px;
 }
 
-.data_entry input[type=text], .data_entry select[type=text] {
-  background-color: #f1f1f1;
+.data_entry button {
+  background: #ef8d2b;
+  color:#fff;
+  font-size: 28px;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+} 
+
+.data_entry button:hover{
+  background:#fff;
+  color:#1AAB8A;
 }
 
-.data_entry input[type=submit], .data_entry button {
-  background-color: black;
-  color: white;
-} 
+.data_entry button:before, .data_entry button:after {
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+
+.data_entry button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+
+.data_entry button:hover:before, .data_entry button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
 .data_entry > .front {
 	position: relative;
-	background-color: black;
+	background-color: #241e12;
 	padding: 2.5% 5%;
 	width: 90%;
 	max-height: 1000px;
@@ -167,7 +206,7 @@ html, body {
 
 .data_entry > .back {
 	position: absolute;
-	background-color: white;
+	background-color: #81bdd9;
 	color: black;
 	padding: 2.5% 5%;
 	width: 90%;
@@ -203,7 +242,7 @@ html, body {
 
 th, td {
   text-align: center;
-  padding: 10px;
+  padding: 4px;
 }
 
 tr:nth-child(even) {
@@ -245,7 +284,8 @@ th {
 	position: relative;
 	padding: 2.5% 5%;
 	width: 90%;
-	background-color: #c57223;
+	background-color: #fff;
+	color: black;
 	-moz-transition: max-height 0.5s ease;
     -ms-transition: max-height 0.5s ease;
     -o-transition: max-height 0.5s ease;
@@ -290,9 +330,6 @@ th {
 
 .graph {
 	position: relative;
-	width: 100%;
-	min-height: 520px;
-	padding: 10px;
 	margin: 5px;
 	font-size: 20px;
 }
@@ -300,7 +337,8 @@ th {
 .map_view {
 	position: relative;
 	padding: 5%;
-	background-color: #c57223;
+	background-color: #fff;
+	color: black;
 }
 
 #map {
@@ -327,6 +365,9 @@ th {
   .content_wrapper {
   	width: 100%;
   }
+  .select_b {
+	width: 100%;
+  }
 }
 
 @media only screen and (max-width: 570px) {
@@ -351,14 +392,18 @@ th {
   	width: 80px;
   }
 
-  .select_b {
-	width: 100%;
+  th {
+  	padding: 2px;
   }
 }
 
 @media only screen and (max-width: 340px) {
   .content_wrapper {
   	width: 340px;
+  }
+
+  .header_text h1 {
+  	font-size: 18px;
   }
 
   .top_nav {
