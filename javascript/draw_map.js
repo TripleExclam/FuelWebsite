@@ -6,7 +6,7 @@ Lots of work to be done here.
 */
 function initMap() {
   $.ajax({
-  url: 'http://localhost/FP/API/station_data_api.php',
+  url: 'http://ausfuel.me/API/station_data_api.php',
   dataType: 'json',
   success: function onSuccess(jsonReturn) {
       for (var i = 0; i<jsonReturn.length; i++) {
@@ -98,8 +98,8 @@ function buildContentString(station, type_price) {
   var contentString = '<div id="content">'+
     '<div id="siteNotice" class="">'+
     '</div>'+
-    '<h1 id="firstHeading" class="first_heading">'+ station +
-    '</h1><div id="bodyContent" class="fuel_popup_content">'+
+    '<h3 id="firstHeading" class="first_heading">'+ station +
+    '</h3><div id="bodyContent" class="fuel_popup_content">'+
      price_string +
     '</div>'+
     '</div>';

@@ -29,7 +29,7 @@ $( "#select_brand" ).change( function() {
 	if (brand.options[brand.selectedIndex].value != "null") {
 		$.ajax({
 		method: 'GET',
-		url: 'http://localhost/FP/api/station_fuel_type_api.php?',
+		url: 'http://ausfuel.me/API/station_fuel_type_api.php?',
 		data: {
 			brand: escape(brand.options[brand.selectedIndex].value),
 			fuel: escape(fuel.options[fuel.selectedIndex].value)
@@ -76,7 +76,7 @@ Query's the database and calls draw_graph.js with the required data.
 function get_graph(brand_id, fuel_id, start_date, end_date, station) {
 	$.ajax({
 	method: 'GET',
-	url: 'http://localhost/FP/API/graph_data_api.php?',
+	url: 'http://ausfuel.me/API/graph_data_api.php?',
 	data: {
 		brand_id: escape(brand_id),
 		fuel_type: escape(fuel_id),

@@ -75,7 +75,6 @@ class car_query {
 	function get_data() {
 		$ch = curl_init();
 
-		curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
 		curl_setopt($ch, CURLOPT_URL, "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&year=".$this->year."&model=".$this->model."&make=".$this->make."");
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -98,7 +97,6 @@ class car_query {
 		}
 
 		$ch = curl_init();
-		curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
 		curl_setopt($ch, CURLOPT_URL, "https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getModel&model=" . $model_id);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

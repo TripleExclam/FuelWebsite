@@ -55,7 +55,7 @@ function loadFuel(location_pick, year_pick, make_pick, model_pick, trim_pick, de
 	document.getElementById('loader').style.display = "inline-block";
 	$.ajax({
 		method: 'GET',
-		url: 'http://localhost/FP/API/math.php?',
+		url: 'http://ausfuel.me/API/math.php?',
 		data: {
 			current_loc: location_pick,
 			year: escape(year_pick),

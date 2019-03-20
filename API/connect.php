@@ -3,9 +3,9 @@
 //Connects to the database.
 //Add api security features here.
 
-$host = 'localhost:3308';
+$host = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = 'ghjdfkfhABC123';
 $db = 'fuel';
 
 $con = mysqli_connect($host, $user, $pass, $db);

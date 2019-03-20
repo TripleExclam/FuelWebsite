@@ -5,7 +5,6 @@ $radi = 0;
 
 include("connect.php");
 $ch = curl_init();
-curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
 curl_setopt($ch, CURLOPT_URL, "https://fppdirectapi-prod.fuelpricesqld.com.au/Subscriber/GetFullSiteDetails?countryId=21&geoRegionLevel=3&geoRegionId=1");
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization:FPDAPI SubscriberToken=451C86B9-5634-4B82-8474-F65CBC119368', 'Content-Type: application/json'));
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -16,7 +15,7 @@ if($re === false) {
 }
 curl_close($ch);
 $decodedarray = json_decode($re, true);
-//echo var_dump($decodedarray);
+echo var_dump($decodedarray);
 for ($j = 0; $j < count($decodedarray["S"]); $j++) {
 	$name = addslashes($decodedarray["S"][$j]["N"]);
 	$location = addslashes($decodedarray["S"][$j]["A"]);

@@ -20,6 +20,11 @@ class distance_query {
 		$ch = curl_init();
 		$this->location = $location;
 		$this->destination = $destination;
+		if ($destination) {
+			$lat_lng = $this->get_coords($this->destination);
+			$this->dlatitude = $lat_lng[0];
+			$this->dlongtitude = $lat_lng[1];
+		}
 		$lat_lng = $this->get_coords($this->location);
 		$this->latitude = $lat_lng[0];
 		$this->longtitude = $lat_lng[1];
@@ -35,7 +40,6 @@ class distance_query {
 	*/
 	function get_coords($location) {
 		$ch = curl_init();
-		curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
 		curl_setopt($ch, CURLOPT_URL, "https://maps.googleapis.com/maps/api/geocode/json?address=". $location . "&key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI");
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -56,12 +60,9 @@ class distance_query {
 	*/
 	function build_box($width) {
 		if ($this->destination) {
-			$lat_lng = $this->get_coords($this->destination);
-			$latitude = $lat_lng[0];
-			$longtitude = $lat_lng[1];
-			$low_lat = ($latitude < $this->latitude ? $latitude : $this->latitude);
-			$high_lat = ($low_lat == $this->latitude ? $latitude : $this->latitude);
-			$low_long = ($longtitude < $this->longtitude ? $longtitude : $this->longtitude);
+			$low_lat = ($this->dlatitude < $this->latitude ? $this->dlatitude : $this->latitude);
+			$high_lat = ($low_lat == $this->latitude ? $this->dlatitude : $this->latitude);
+			$low_long = ($this->dlongtitude < $this->longtitude ? $this->dlongtitude : $this->longtitude);
 			$high_long = ($low_long == $this->longtitude ? $longtitude : $this->longtitude);
 			$box = array($low_lat - $width, $high_lat + $width, $low_long - $width, $high_long + $width);
 		} else {
@@ -110,7 +111,6 @@ class distance_query {
 				$station_loc = mysqli_fetch_array($query);
 			}
 			$ch = curl_init();
-			curl_setopt ($ch, CURLOPT_CAINFO, "C:\wamp64\bin\php\php7.2.10\cacert.pem");
 			curl_setopt($ch, CURLOPT_URL, "https://maps.googleapis.com/maps/api/directions/json?origin=".$this->location."&destination=".$station_loc['latitude'].",".$station_loc['longtitude']."&key=AIzaSyArHArOSEyLkGdrK5VJt7ByeeMPGxlryfI");
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
