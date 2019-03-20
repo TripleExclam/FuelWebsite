@@ -20,7 +20,6 @@ $optional_stop = false;
 
 if (isset($_GET['destination']) && $_GET['destination'] != "") {
 	$optional_stop = curl_escape($ch, $_GET['destination']);
-	$location = $location . $optional_stop;
 	$dist = new distance_query($location, $optional_stop);
 } else {
 	$dist = new distance_query($location);
@@ -37,10 +36,11 @@ if ($consumption == 0) {
 	$consumption = 8;
 }
 
+
 $cost = array();
 $current_date = date('Y-m-d', strtotime('- 7 days'));
 
-$sql = "SELECT * FROM station s, distance d, price p, fuel_types t WHERE d.location LIKE '".$location."' AND p.fuel_id='".$fuel_type."' AND p.date_updated >= ALL (SELECT date_updated FROM price p2 WHERE p2.fuel_id = p.fuel_id AND p2.station_id = p.station_id) AND p.station_id = d.station_id AND s.id = p.station_id AND t.fuel_id = p.fuel_id GROUP BY s.id";
+$sql = "SELECT * FROM station s, distance d, price p, fuel_types t WHERE d.location LIKE '".$dist->get_location()."' AND p.fuel_id='".$fuel_type."' AND p.date_updated >= ALL (SELECT date_updated FROM price p2 WHERE p2.fuel_id = p.fuel_id AND p2.station_id = p.station_id) AND p.station_id = d.station_id AND s.id = p.station_id AND t.fuel_id = p.fuel_id GROUP BY s.id";
 $query = mysqli_query($con, $sql);
 
 if (!$query) {
@@ -73,7 +73,6 @@ while ($station = mysqli_fetch_array($query)) {
 	usort($cost, "compare");
 	$i++;
 }
-
 echo json_encode($cost);
 mysqli_close($con);
  ?>
