@@ -26,5 +26,8 @@ for ($j = 0; $j < count($decodedarray["SitePrices"]); $j++) {
 			echo("Error description: " . mysqli_error($con));
 		}
 	}
+
 }
+
+echo "Job Complete";
 ?>
