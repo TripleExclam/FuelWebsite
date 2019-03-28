@@ -1,7 +1,7 @@
 // Some garbage spaghetti code that I can't be bothered cleaning up or re-writing.
 // Enjoy.
 
-$.getJSON('https://www.carqueryapi.com/api/0.3/'+"?callback=?", {cmd:"getMakes", year:"2019"}, function(data) {
+$.getJSON('https://www.carqueryapi.com/api/0.3/'+"?callback=?", {cmd:"getMakes"}, function(data) {
 
   	//The 'data' variable contains all response data.
   	var makes = data.Makes;

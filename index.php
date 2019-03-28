@@ -5,8 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title> AusFuel </title>
 	<link rel="stylesheet" href="css/new_style.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 </head>
@@ -16,7 +14,7 @@
 		<a href="#" class="left_item active" id="home" onclick="change(this)" >HOME</a>
 		<a href="#" class="left_item" id="prices" onclick="change(this)">PRICES</a>
 		<a href="#" class="left_item" id="calculate" onclick="change(this)">CALCULATE</a>
-		<a href="#" class="left_item" id="data" onclick="change(this)">DATA</a>
+		<a href="#" class="left_item" id="data" onclick="change(this)">MAP</a>
 		<div id="slide_bar" class="slide_bar"></div>
 	</div>
 </div>
@@ -52,7 +50,7 @@
 	</div>
 	<div id="entry_fields1" class="data_entry">
 		<div id="fuel_data" class="fuel_data">
-			<h1> Fuel Data </h1>
+			<h1> Price Trends </h1>
 			<div id="search_field" class="search_field">
 				<div id="select_b" class="select_b">
 					<h2>Station:</h2>
@@ -111,12 +109,13 @@
 				<div class="keyword" style="display: none;">
 					<input id="keyword_search" class="keyword_search" type="text" placeholder="keyword search" name="keywords" style="display: none;">
 				</div>
+				<div id="chart_container" class="chart_container"></div>
 			</div>
 		</div>
 	</div>
 	<div id="entry_fields2" class="data_entry">
 		<div id="back" class="back">
-			<h1> Price Search </h1>
+			<h1> Price Calculator </h1>
 			<h2 id="fuel_results"></h2>
 			<div id="loader" class="loader"></div> 
 			<table id="fuel_results_data" class="fuel_stations">

@@ -1,7 +1,8 @@
 function draw_graph(title, graph_data, graph_labels, graph_regression) {
+	document.getElementById("chart_container").style.display = "block";
 	var title_string = title;
 	$( '#myChart' ).remove();
-	$('#fuel_data').append('<canvas id="myChart" class="graph"><canvas>');
+	$('#chart_container').append('<canvas id="myChart" class="graph"><canvas>');
 	var ctx = document.getElementById("myChart").getContext("2d");
 	var myChart = new Chart(ctx, {
 	    type: 'scatter',
@@ -26,8 +27,7 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	        ]
 	    },
 	    options: {
-	    	maintainAspectRatio: true,
-	    	responsive: true,
+	    	maintainAspectRatio: false,
 	    	onResize: function(chart, size) {
 				if ($( '#content_wrapper' ).width() < 730) {
 					chart.options.scales.xAxes[0].time.unitStepSize = 10;
@@ -40,6 +40,7 @@ function draw_graph(title, graph_data, graph_labels, graph_regression) {
 	            	type: 'time',
 	            	time: {
 	                    unit: 'day',
+			    unitStepSize: 7,
 	                    displayFormats: {
 	                    	day: 'MMM D YYYY'
 	                    }

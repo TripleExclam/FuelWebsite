@@ -1,16 +1,13 @@
 <?php
-
-//Connects to the database.
-//Add api security features here.
-
 $host = 'localhost';
-$user = 'root';
-$pass = 'ghjdfkfhABC123';
+$user = 'basicBitch';
+$pass = 'i7T5HanUjKvQfOSnS';
 $db = 'fuel';
 
 $con = mysqli_connect($host, $user, $pass, $db);
 if (!$con) {
-	echo "unable to connect";
-	echo("Error description: " . mysqli_error($con));
+        echo "unable to connect";
+        echo("Error description: " . mysqli_error($con));
 }
 ?>
+

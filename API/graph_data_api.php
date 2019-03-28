@@ -2,10 +2,12 @@
 
 include("connect.php");
 
-$sql = "SELECT AVG(price) as price, date_updated FROM price WHERE station_id IN (SELECT id FROM station WHERE brand_id = '".$_GET['brand_id']."') AND fuel_id = '".$_GET['fuel_type']."' GROUP BY DATE_FORMAT(date_updated, '%d/%m/%Y') ORDER BY date_updated";
+$cut_date = date('Y-m-d',strtotime(date('Y-01-01')));
+
+$sql = "SELECT AVG(price) as price, date_updated FROM price WHERE station_id IN (SELECT id FROM station WHERE brand_id = '".$_GET['brand_id']."') AND fuel_id = '".$_GET['fuel_type']."' GROUP BY DATE_FORMAT(date_updated, '%d/%m/%Y') HAVING date_updated >= '".$cut_date."' ORDER BY date_updated";
 
 if ($_GET['brand_id'] == "") {
-	$sql = "SELECT AVG(price) as price, date_updated FROM price WHERE fuel_id = '".$_GET['fuel_type']."' GROUP BY DATE_FORMAT(date_updated, '%d/%m/%Y') ORDER BY date_updated";
+	$sql = "SELECT AVG(price) as price, date_updated FROM price WHERE fuel_id = '".$_GET['fuel_type']."' GROUP BY DATE_FORMAT(date_updated, '%d/%m/%Y') HAVING date_updated >= '".$cut_date."' ORDER BY date_updated";
 }
 
 
